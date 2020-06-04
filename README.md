@@ -26,6 +26,10 @@ ev.authorize(
   code = 'xxxx',
   redirectUri = 'yyyyyy'
 )
+
+# get access token, will expire in 5 minutes
+token = ev.token['accessToken']
+
 # // api request
 # // check all api doc from https://engage-voice-api-docs.readthedocs.io/en/latest/
 r = ev.get('/api/v1/admin/accounts')

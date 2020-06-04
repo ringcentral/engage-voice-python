@@ -1,7 +1,7 @@
 import setuptools
 import json
 
-version = '0.2.2'
+version = '0.2.3'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

@@ -15,10 +15,6 @@ pip install ringcentral_engage_voice
 
 ## Usage
 
-```bash
-pip install ringcentral_engage_voice
-```
-
 ```python
 from ringcentral_engage_voice import RingCentralEngageVoice
 # create from ringcentral app client id /secret

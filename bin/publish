@@ -1,0 +1,9 @@
+#!/bin/bash
+cd `dirname $0`
+cd ..
+rm -rf dist
+source venv/bin/activate
+python setup.py sdist bdist_wheel
+source venv2/bin/activate
+python setup.py sdist bdist_wheel
+twine upload dist/*

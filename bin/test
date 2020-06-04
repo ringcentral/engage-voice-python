@@ -1,0 +1,7 @@
+#!/bin/bash
+cd `dirname $0`
+cd ..
+
+## now test
+python3 test/engage_voice_lagecy_spec.py
+python3 test/engage_voice_spec.py

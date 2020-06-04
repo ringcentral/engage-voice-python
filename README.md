@@ -10,7 +10,7 @@
 ### PIP
 
 ```sh
-$ pip install ringcentral-engage-voice
+pip install ringcentral_engage_voice
 ```
 
 ## Usage

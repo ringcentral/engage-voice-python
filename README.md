@@ -26,7 +26,8 @@ ev = RingCentralEngageVoice(
 # auth with password flow
 ev.authorize(
   username = 'USERNAME',
-  password = 'PASSWORD'
+  password = 'PASSWORD',
+  extension = 'EXTENSION' # optional
 )
 # // can also auth with auth code flow
 # // check https://developers.ringcentral.com/guide/authentication for more detail

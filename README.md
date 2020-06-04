@@ -5,6 +5,14 @@
 
 [API docs](https://engage-voice-api-docs.readthedocs.io/en/latest/).
 
+## Installation
+
+### PIP
+
+```sh
+$ pip install ringcentral-engage-voice
+```
+
 ## Usage
 
 ```bash

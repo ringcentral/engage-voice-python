@@ -69,6 +69,11 @@ class RingCentralEngageVoice(object):
     def token(self, value):
         self._token = value
 
+    def refresh(self):
+        self.getToken(
+          self.token['refreshToken']
+        )
+
     def isLegacyServer (self, server):
       return server in LEGACY_SERVERS
 
@@ -80,7 +85,32 @@ class RingCentralEngageVoice(object):
         arr = [p, self.apiPrefix, path]
         if self.isLegacy:
           arr = [p, path]
-        return urlparse.urljoin(self.server, "/".join(urlparse.quote_plus(part.strip("/"), safe="/") for part in arr))
+        return urlparse.urljoin(
+          self.server, "/".join(
+            urlparse.quote_plus(part.strip("/"), safe="/") for part in arr
+          )
+        )
+
+    def patchHeader(self, header = {}):
+        user_agent_header = '{name} Python {major_lang_version}.{minor_lang_version} {platform}'.format(
+            name = 'ringcentral/engage-voice',
+            major_lang_version = sys.version_info[0],
+            minor_lang_version = sys.version_info[1],
+            platform = platform.platform(),
+        )
+        shareHeaders = {
+            'User-Agent': user_agent_header,
+            'RC-User-Agent': user_agent_header,
+            'X-User-Agent': user_agent_header,
+        }
+        authHeader = {}
+        if self.isLegacy:
+            authHeader = self._legacyHeader()
+        else:
+            authHeader = {
+                'Authorization': self._autorization_header()
+            }
+        return _.assign(shareHeaders, authHeader, header or {})
 
     def _request(
         self,
@@ -94,26 +124,8 @@ class RingCentralEngageVoice(object):
         headers = None
     ):
         url = self.joinPath(endpoint)
-        user_agent_header = '{name} Python {major_lang_version}.{minor_lang_version} {platform}'.format(
-            name = 'ringcentral/engage-voice',
-            major_lang_version = sys.version_info[0],
-            minor_lang_version = sys.version_info[1],
-            platform = platform.platform(),
-        )
-        shareHeaders = {
-            'User-Agent': user_agent_header,
-            'RC-User-Agent': user_agent_header,
-            'X-User-Agent': user_agent_header,
-        }
-        if headers is None:
-            if self.isLegacy:
-                headers = self._legacyHeader()
-            else:
-                headers = {
-                    'Authorization': self._autorization_header()
-                }
-        headers = _.assign(headers, shareHeaders)
-        req = Request(method, url, params = params, data = data, json = json, files = files, headers = headers)
+        newHeaders = self.patchHeader(headers)
+        req = Request(method, url, params = params, data = data, json = json, files = files, headers = newHeaders)
         prepared = req.prepare()
         if multipart_mixed:
             prepared.headers['Content-Type'] = prepared.headers['Content-Type'].replace('multipart/form-data;', 'multipart/mixed;')
@@ -124,7 +136,19 @@ class RingCentralEngageVoice(object):
         try:
             r.raise_for_status()
         except:
-            raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
+            if 'expired' in r.text:
+                self.refresh()
+                newHeaders = self.patchHeader(headers)
+                req = Request(method, url, params = params, data = data, json = json, files = files, headers = newHeaders)
+                prepared = req.prepare()
+                s = Session()
+                r = s.send(prepared)
+                try:
+                    r.raise_for_status()
+                except:
+                  raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
+            else:
+                raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
         return r
 
     def authorize (self, **kwargs):
@@ -170,10 +194,18 @@ class RingCentralEngageVoice(object):
             token = self.token['apiToken']
             self.delete(f'/api/v1/admin/token/{token}')
 
-    def getToken (self):
-        url = f'{self.server}/api/auth/login/rc/accesstoken'
-        token = self.rc.platform().auth().data()['access_token']
-        body = f'rcAccessToken={token}&rcTokenType=Bearer'
+    def getToken (self, refreshToken = None):
+        url = ''
+        token = ''
+        body = ''
+        if refreshToken is None:
+          url = f'{self.server}/api/auth/login/rc/accesstoken?includeRefresh=true'
+          token = self.rc.platform().auth().data()['access_token']
+          body = f'rcAccessToken={token}&rcTokenType=Bearer'
+        else:
+          url = f'{self.server}/api/auth/token/refresh'
+          token = refreshToken
+          body = f'refresh_token={token}&rcTokenType=Bearer'
         res = self._request(
             'post',
             url,

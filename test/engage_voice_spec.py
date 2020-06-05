@@ -7,6 +7,7 @@ except:
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
 import unittest
+import time
 from ringcentral_engage_voice import RingCentralEngageVoice
 
 RINGCENTRAL_CLIENTID = ''
@@ -39,6 +40,13 @@ class TestEngageVoice(unittest.TestCase):
       password = RINGCENTRAL_PASSWORD,
       extension = RINGCENTRAL_EXTENSION
     )
+    # ev.debug = True
+    # print('before')
+    # print(ev.token)
+    ev.refresh()
+    # print('after')
+    # print(ev.token)
+    time.sleep(60 * 6)
     r = ev.get('/api/v1/admin/accounts')
     self.assertEqual(len(r.json()) > 0, True)
 

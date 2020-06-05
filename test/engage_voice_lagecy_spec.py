@@ -37,7 +37,9 @@ class TestLegacy(unittest.TestCase):
     )
     r = ev.get('/api/v1/admin/accounts')
     rr = r.json()
+    self.revokeLegacyToken()
     self.assertEqual(len(rr) > 0, True)
+
 
 if __name__ == '__main__':
     unittest.main()

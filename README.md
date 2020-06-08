@@ -1,4 +1,4 @@
-# [RingCentral Engage Voice API wrapper for Python](https://github.com/ringcentral/engage-voice-python)
+# [RingCentral Engage Voice Python SDK](https://github.com/ringcentral/engage-voice-python)
 
 
 [![Build Status](https://travis-ci.org/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.org/ringcentral/engage-digital-python)

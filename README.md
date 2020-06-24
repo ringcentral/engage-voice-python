@@ -102,7 +102,7 @@ ev.delete(endpoint, params = None)
 
 ## Test
 
-With virtual env:
+With virtual env(pip3 and python3.6+ required):
 
 ```bash
 bin/init
@@ -115,7 +115,7 @@ cp env-sample.env .env
 ./bin/test
 ```
 
-Without virtual env:
+Without virtual env(pip3 and python3.6+ required):
 
 ```sh
 pip3 install python-dotenv pydash pylint twine

@@ -10,6 +10,8 @@
 ### PIP
 
 ```sh
+pip3 install ringcentral_engage_voice
+# or
 pip install ringcentral_engage_voice
 ```
 
@@ -100,12 +102,28 @@ ev.delete(endpoint, params = None)
 
 ## Test
 
+With virtual env:
+
 ```bash
 bin/init
 source venv/bin/activate
 pip install -r requirements.txt
 cp env-sample.env .env
 # edit .env fill all fields
+
+# now test
+./bin/test
+```
+
+Without virtual env:
+
+```sh
+pip3 install python-dotenv pydash pylint twine
+pip3 install -r requirements.txt
+cp env-sample.env .env
+# edit .env fill all
+
+# now test
 ./bin/test
 ```
 

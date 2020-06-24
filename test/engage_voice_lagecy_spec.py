@@ -37,7 +37,7 @@ class TestLegacy(unittest.TestCase):
     )
     r = ev.get('/api/v1/admin/accounts')
     rr = r.json()
-    self.revokeLegacyToken()
+    ev.revokeLegacyToken()
     self.assertEqual(len(rr) > 0, True)
 
 

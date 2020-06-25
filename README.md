@@ -100,9 +100,13 @@ ev.patch(endpoint, json = None, params = None, data = None, files = None, multip
 ev.delete(endpoint, params = None)
 ```
 
+## Virtual Environment
+
+The venv module allows you to create a lightweight "virtual environment" within your own site directory, isolated from system site directories. The virtual environment has it's own Python binary and can have its own independent set of installed Python packages in its site directories. This is a good way to to create an isolated test environment to test out this code
+
 ## Test
 
-With virtual env(pip3 and python3.6+ required):
+To use the virtual environments, make sure you have pip3 and python3.6+ setup, then execute the following:
 
 ```bash
 bin/init
@@ -115,7 +119,7 @@ cp env-sample.env .env
 ./bin/test
 ```
 
-Without virtual env(pip3 and python3.6+ required):
+To test without virtual environments and in your system directory, make sure you have pip3 and python3.6+, then execute the following:
 
 ```sh
 pip3 install python-dotenv pydash pylint twine

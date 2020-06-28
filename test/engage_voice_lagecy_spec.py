@@ -37,6 +37,43 @@ class TestLegacy(unittest.TestCase):
     )
     r = ev.get('/api/v1/admin/accounts')
     rr = r.json()
+    r1 = None
+    try:
+      r1 = ev.post('/api/vx/admin/accounts1')
+    except Exception as e:
+      x = str(e)
+      self.assertEqual(
+        '401' in x or '404' in x,
+        True
+      )
+      print(e, 'eee')
+    try:
+      r1 = ev.patch('/api/vx/admin/accounts1')
+    except Exception as e:
+      x = str(e)
+      self.assertEqual(
+        '401' in x or '404' in x,
+        True
+      )
+      print(e, 'eee')
+    try:
+      r1 = ev.put('/api/vx/admin/accounts1')
+    except Exception as e:
+      x = str(e)
+      self.assertEqual(
+        '401' in x or '404' in x,
+        True
+      )
+      print(e, 'eee')
+    try:
+      r1 = ev.delete('/api/vx/admin/accounts1')
+    except Exception as e:
+      x = str(e)
+      self.assertEqual(
+        '401' in x or '404' in x,
+        True
+      )
+      print(e, 'eee')
     ev.revokeLegacyToken()
     self.assertEqual(len(rr) > 0, True)
 

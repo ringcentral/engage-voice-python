@@ -4,4 +4,4 @@ cd ..
 pip3 install virtualenv
 virtualenv venv --python=python3
 source ./venv/bin/activate
-pip install python-dotenv pydash pylint twine
+pip3 install -r requirements.txt

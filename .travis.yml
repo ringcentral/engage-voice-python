@@ -15,8 +15,11 @@ before_install:
   - python3 -V
   - pip3 -V
 install:
+  - pip3 install -r requirements-dev.txt
   - pip3 install -r requirements.txt
 script: ./bin/test
+after_success:
+  - ./bin/coverage
 env:
   global:
     - CXX=g++-4.8

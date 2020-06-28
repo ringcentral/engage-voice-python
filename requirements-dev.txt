@@ -1,0 +1,7 @@
+python-dotenv
+pylint
+twine
+coverage
+coveralls
+discover
+pyyaml

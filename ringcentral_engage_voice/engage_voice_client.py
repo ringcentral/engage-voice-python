@@ -1,7 +1,7 @@
 import pydash as _
 try:  # py3
     import urllib.parse as urlparse
-except:  # py2
+except:  # pragma: no cover
     import urlparse
 from requests import Request, Session
 from ringcentral import SDK
@@ -24,7 +24,7 @@ LEGACY_SERVERS = [
 RINGCENTRAL_SERVER = 'https://platform.ringcentral.com'
 
 # from https://github.com/tylerlong/ringcentral-python/blob/master/ringcentral_client/rest_client.py
-def pretty_print_POST(req):
+def pretty_print_POST(req): # pragma: no cover
     """
     At this point it is completely built and ready
     to be fired; it is "prepared".
@@ -69,7 +69,7 @@ class RingCentralEngageVoice(object):
     def token(self, value):
         self._token = value
 
-    def refresh(self):
+    def refresh(self): # pragma: no cover
         self.getToken(
           self.token['refreshToken']
         )
@@ -106,7 +106,7 @@ class RingCentralEngageVoice(object):
         authHeader = {}
         if self.isLegacy:
             authHeader = self._legacyHeader()
-        else:
+        else: # pragma: no cover
             authHeader = {
                 'Authorization': self._autorization_header()
             }
@@ -129,14 +129,14 @@ class RingCentralEngageVoice(object):
         prepared = req.prepare()
         if multipart_mixed:
             prepared.headers['Content-Type'] = prepared.headers['Content-Type'].replace('multipart/form-data;', 'multipart/mixed;')
-        if self.debug:
+        if self.debug: # pragma: no cover
             pretty_print_POST(prepared)
         s = Session()
         r = s.send(prepared)
         try:
             r.raise_for_status()
         except:
-            if 'expired' in r.text:
+            if 'expired' in r.text: # pragma: no cover
                 self.refresh()
                 newHeaders = self.patchHeader(headers)
                 req = Request(method, url, params = params, data = data, json = json, files = files, headers = newHeaders)
@@ -154,7 +154,7 @@ class RingCentralEngageVoice(object):
     def authorize (self, **kwargs):
         if self.isLegacy:
             self.legacyAuthorize(**kwargs)
-        else:
+        else: # pragma: no cover
             plat = self.rc.platform()
             plat.login(**kwargs)
             self.getToken()
@@ -194,7 +194,7 @@ class RingCentralEngageVoice(object):
             token = self.token['apiToken']
             self.delete(f'/api/v1/admin/token/{token}')
 
-    def getToken (self, refreshToken = None):
+    def getToken (self, refreshToken = None): # pragma: no cover
         url = ''
         token = ''
         body = ''

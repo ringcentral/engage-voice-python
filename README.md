@@ -1,6 +1,6 @@
 # [RingCentral Engage Voice Python SDK](https://github.com/ringcentral/engage-voice-python)
 
-[![Build Status](https://travis-ci.org/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.org/ringcentral/engage-digital-python)
+[![Build Status](https://travis-ci.org/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.org/ringcentral/engage-voice-python)
 [![Coverage Status](https://coveralls.io/repos/github/ringcentral/engage-voice-python/badge.svg?branch=test)](https://coveralls.io/github/ringcentral/engage-voice-python?branch=test)
 
 [API docs](https://engage-voice-api-docs.readthedocs.io/en/latest/).
@@ -122,7 +122,7 @@ cp env-sample.env .env
 To test without virtual environments and in your system directory, make sure you have pip3 and python3.6+, then execute the following:
 
 ```sh
-pip3 install python-dotenv pydash pylint twine
+pip3 install -r requirements-dev.txt
 pip3 install -r requirements.txt
 cp env-sample.env .env
 # edit .env fill all

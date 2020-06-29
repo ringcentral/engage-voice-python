@@ -2,11 +2,4 @@
 cd `dirname $0`
 cd ..
 
-## now test
-# coverage run test/engage_voice_lagecy_spec.py
-coverage run test/engage_voice_spec.py
-# coverage run test/engage_voice_normal_spec.py
-coverage run test/engage_voice_lagecy_spec.py
-# coverage run test/engage_voice_lagecy_spec.py
-coverage report -m
 coveralls

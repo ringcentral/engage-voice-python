@@ -117,6 +117,12 @@ cp env-sample.env .env
 
 # now test
 ./bin/test
+
+# test non-lagecy API
+python3 test/engage_voice_spec.py
+
+# test lagecy API only
+python3 test/engage_voice_lagecy_spec.py
 ```
 
 To test without virtual environments and in your system directory, make sure you have pip3 and python3.6+, then execute the following:

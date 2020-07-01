@@ -43,7 +43,9 @@ class TestEngageVoice(unittest.TestCase):
     # ev.debug = True
     # print('before')
     # print(ev.token)
+    print('==================')
     print('this will take 6 minutes to verify token expire')
+    print('==================')
     ev.refresh()
     # print('after')
     # print(ev.token)

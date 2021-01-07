@@ -71,8 +71,6 @@ let r = ev.get('/api/v1/admin/accounts')
 r = r.json()
 expect(len(r) > 0).toBe(true)
 
-# revoke api token
-ev.revokeLegacyToken()
 ```
 
 ## Instance methods

@@ -99,6 +99,7 @@ class RingCentralEngageVoice(object):
             platform = platform.platform(),
         )
         shareHeaders = {
+            'Content-Type': 'application/json',
             'User-Agent': user_agent_header,
             'RC-User-Agent': user_agent_header,
             'X-User-Agent': user_agent_header,
@@ -174,25 +175,12 @@ class RingCentralEngageVoice(object):
             }
         )
         r = res.json()
-        url1 = f'{self.server}/api/v1/admin/token'
-        res1 = self._request(
-            'post',
-            url1,
-            headers = {
-                'X-Auth-Token': r['authToken'] or ''
-            }
-        )
+        self.token = r
 
-        r1 = res1.text
-        f = _.assign(r, {
-            'apiToken': r1
-        })
-        self.token = f
-
-    def revokeLegacyToken (self):
-        if self._token is not None:
-            token = self.token['apiToken']
-            self.delete(f'/api/v1/admin/token/{token}')
+    # def revokeLegacyToken (self):
+    #     if self._token is not None:
+    #         token = self.token['authToken']
+    #         self.delete(f'/api/v1/admin/token/{token}')
 
     def getToken (self, refreshToken = None): # pragma: no cover
         url = ''
@@ -219,7 +207,7 @@ class RingCentralEngageVoice(object):
     def _legacyHeader (self):
         accessToken = ''
         if self.token:
-            accessToken = self.token['apiToken']
+            accessToken = self.token['authToken']
         return {
             'X-Auth-Token': accessToken
         }

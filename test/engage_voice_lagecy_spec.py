@@ -5,6 +5,7 @@ except:
   pass
 
 import sys, os
+# import time
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
 import unittest
 from ringcentral_engage_voice import RingCentralEngageVoice
@@ -74,9 +75,15 @@ class TestLegacy(unittest.TestCase):
         True
       )
       print(e, 'eee')
-    ev.revokeLegacyToken()
+    # ev.revokeLegacyToken()
     self.assertEqual(len(rr) > 0, True)
-
+    # print('============')
+    # print('test 6 min if expire')
+    # print('============')
+    # time.sleep(60 * 6)
+    # r = ev.get('/api/v1/admin/accounts')
+    # rr = r.json()
+    # self.assertEqual(len(rr) > 0, True)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,6 @@
 # [RingCentral Engage Voice Python SDK](https://github.com/ringcentral/engage-voice-python)
 
-[![Build Status](https://travis-ci.org/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.org/ringcentral/engage-voice-python)
+[![Build Status](https://travis-ci.com/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.com/ringcentral/engage-voice-python)
 [![Coverage Status](https://coveralls.io/repos/github/ringcentral/engage-voice-python/badge.svg?branch=test)](https://coveralls.io/github/ringcentral/engage-voice-python?branch=test)
 
 [API docs](https://engage-voice-api-docs.readthedocs.io/en/latest/).

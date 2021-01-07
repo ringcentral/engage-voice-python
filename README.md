@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ringcentral/engage-voice-python.svg?branch=test)](https://travis-ci.org/ringcentral/engage-voice-python)
 [![Coverage Status](https://coveralls.io/repos/github/ringcentral/engage-voice-python/badge.svg?branch=test)](https://coveralls.io/github/ringcentral/engage-voice-python?branch=test)
+[![Community](https://img.shields.io/badge/community-dev_forums-blue)](https://community.ringcentral.com/spaces/144/index.html)
 
 [API docs](https://engage-voice-api-docs.readthedocs.io/en/latest/).
 

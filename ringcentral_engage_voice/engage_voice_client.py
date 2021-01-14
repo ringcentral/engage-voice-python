@@ -7,6 +7,7 @@ from requests import Request, Session
 from ringcentral import SDK
 import sys
 import platform
+from requests.utils import quote
 # import json
 
 version = 'dev'
@@ -165,7 +166,7 @@ class RingCentralEngageVoice(object):
 
     def getLegacyToken (self, username = '', password = ''):
         url = f'{self.server}/api/v1/auth/login'
-        body = f'username={username}&password={password}'
+        body = f'username={quote(username)}&password={password}'
         res = self._request(
             'post',
             url,

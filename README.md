@@ -25,6 +25,12 @@ ev = RingCentralEngageVoice(
   'RINGCENTRAL_CLIENT_ID',
   'RINGCENTRAL_CLIENT_SECRET'
 )
+
+# Recommended - auth  with jwt
+ev.authorize(
+  jwt = process.env.RINGCENTRAL_JWT
+)
+
 # auth with password flow
 ev.authorize(
   username = 'USERNAME',
